@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JS : if, switch-case</title>
+<script>
+    // if (조건식) { 실행문 }
+    // if (조건식) { } else { }
+    // if (조건식) { } else if () { } else if () { } else { }
+    if (true) {
+        document.write("if문 조건식 결과가 true인 경우 출력", "<br>");
+    } 
+    
+    let bool = confirm("<확인>선택 - true 출력, <취소>선택 false 출력");
+    if (bool) {
+        document.write("<확인>선택 - true 출력", "<br>");
+    } else {
+        document.write("<취소>선택 false 출력", "<br>");
+    }
+    document.write("<hr>");
+    
+    document.write('"100" > "20" : ' + ("100" > "20"), "<br>");
+    //false : 문자열 비교
+    document.write('"100" > "20" : ' + ("100" > 20), "<br>");
+    //true : 숫자타입 형변환 후 비교
+    document.write("<hr>");
+    
+    //=========================
+    /* 점수를 입력받고 점수에 따라 평가하고 결과를 화면에 표시
+    90 이상 : A, 80 이상 : B, 70이상 : C, 70미만 : D
+    출력형태 : 점수 90, 평가결과 : A
+    // if (조건식) { } else if () { } else if () { } else { }
+    **************************/
+    let score = prompt("점수를 입력하세요(0~100)", 0);
+    document.write("isNaN(score) : " + isNaN(score), "<br>");
+    document.write("score : -" + score + "-", "<br>");
+    
+    let result = "평가안됨";
+    if (score == null || score.trim().length == 0 || isNaN(score)){
+        result = "처리안함-숫자가 아님";
+    } else if (score < 0 || score > 100) {
+        result = "정상범위(0~100) 아님";
+    } else if (score >= 90) {
+        result = "A";
+    } else if (score >= 80) {
+        result = "B";
+    } else if (score >= 70) {
+        result = "C";
+    } else {
+        result = "D";
+    }
+    
+    document.write("<h3>점수 " + score + ", 평가결과 : " + result + "</h3>");
+    
+    /*
+    if (score >= 90) {
+        document.write("점수 : " + score + ", 평가결과 : A", "<br>");
+    } else if (score >= 80) {
+        document.write("점수 : " + score + ", 평가결과 : B", "<br>");
+    } else if (score >= 70) {
+        document.write("점수 : " + score + ", 평가결과 : C", "<br>");
+    } else {
+        document.write("점수 : " + score + ", 평가결과 : D", "<br>");
+    }
+    */
+    
+    
+    //==========================
+    // switch ~ case 문
+    let divScore = Math.trunc(score / 10); // 85/10 ---> 8.5 ---> 8
+    divScore = parseInt(score / 10); // 85/10 ---> 8.5 ---> 8
+    
+    console.log("score : " + score + ", divScore : " + divScore);
+    document.write("score : " + score + ", divScore : " + divScore, "<br>");
+    
+    switch (divScore) {
+        case 10:
+            //result = "A";
+            //break;
+        case 9:
+            result = "A";
+            break;
+        case 8:
+            result = "B";
+            break;
+        case 7:
+            result = "C";
+            break;
+        default:
+            result = "D";
+            break;
+    }
+    document.write("<h3>점수 " + score + ", 평가결과 : " + result + "</h3>");
+    
+    //(주의) switch case문은 엄격한 비교처리(타입까지 일치여부 확인한다)
+    document.write("<h3>switch case문은 엄격한 비교처리(타입까지 일치여부 확인한다)</h3>");
+    let data = "100";
+    
+    switch (data) {
+        case 100:
+            alert("data는 숫자(number) 100 입니다");
+            break;
+        case "100":
+            alert('data는 문자열(string) "100" 입니다');
+            break;
+    }
+    
+    document.write(">>> head JavaScript 끝 -------", "<br>");
+</script>
+</head>
+<body>
+    
+    
+    
+    
+</body>
+</html>
