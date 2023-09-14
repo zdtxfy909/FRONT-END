@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BOM window.location</title>
+<script>
+    /* BOM window.location : 사용자 브라우저 창의 url 정보 
+    location.href : 주소영역에 있는 URL 정보 설정, 조회
+    location.protocol : URL 프로토콜(통신규약) 조회
+    location.host : URL 호스트 이름(도메인명, 서버명, IP주소)
+    location.port : URL 포트번호
+    location.path : URL 서버상의 자원 위치정보(path)
+    location.search : URL 상의 요청 쿼리
+    *********************/
+    
+    //location.href = "https://n.news.naver.com/mnews/article/001/0014192684?rc=N&ntype=RANKING";
+    //주석 풀면 바로 페이지 전환됨
+    
+    document.write("href : " + location.href, "<br>"); //href 정보를 읽을 때 사용. 위에 기사 주소는 주석처리해서 현재 html 파일 주소를 보여줌.
+    document.write("protocol : " + location.protocol, "<br>");
+    document.write("host : " + location.host, "<br>");
+    document.write("port : " + location.port, "<br>");
+    document.write("path : " + location.path, "<br>");
+    document.write("search : " + location.search, "<br>");
+    
+    
+    
+</script>
+</head>
+<body>
+    <h1>BOM window.location</h1>
+    
+    
+    
+</body>
+</html>

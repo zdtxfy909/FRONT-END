@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>window.moveTo()</title>
+<script>
+    
+</script>
+</head>
+<body>
+    <h2>윈도우 열고 이동시키기</h2>
+    <button onclick="openWindow()">윈도우 열기(window.open)</button>
+    <button onclick="moveToWindow()">윈도우 이동(window.moveTo)</button>
+    
+<script>
+    let myWindow; //어디서나 쓸 수 있도록 전역변수 선언
+    
+    //창 띄어주기
+    function openWindow() {
+        alert(">> openWindow() 실행");  
+        myWindow = window.open("", "myWindow", "width=200, height=100");
+        myWindow.document.write("<h3>내가 만든 윈도우</h3>");
+        myWindow.moveTo(300,300); //left, top 열자마자 원하는 위치로 이동됨
+    } 
+    
+    //띄어진 창을 특정 위치로 이동
+    function moveToWindow() {
+        alert(">> moveToWindow() 실행");
+        myWindow.moveTo(300,300); //버튼이 눌러지면 브라우저가 이동함
+        myWindow.focus(); //특정 obj에 포커스를 줌. 이동버튼을 누르면서 포커스가 다시 메인으로 가니까 밑으로 숨지 않도록(위로 올라오게) 적용
+    } 
+    
+</script>    
+    
+</body>
+</html>
+
+
+
+
+
+
