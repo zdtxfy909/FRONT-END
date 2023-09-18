@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+<script>
+    // 옵션 금액에 따라 차량금액 변경처리
+    // 기본차량가액에서 시작해서 옵션금액 변경시마다 더하기, 빼기 처리
+    // 체크상태 : 옵션금액 더하기
+    // 체크해제상태 : 옵션금액 빼기
+    window.onload = function(){
+        carZone = document.getElementById("carZone");
+        carZone.style.border = "2px solid lightgray"; 
+        carZone.style.display = "inline-block";
+        carZone.style.padding = "10px";
+        
+        h1 = document.getElementsByTagName("h1");
+        h1[0].style.textAlign = "center";
+        
+        table = document.getElementsByTagName("table")
+        console.log(table[0]);
+        table[0].style.border = "2px solid black";
+        table[0].style.borderCollapse = "collapse";
+        
+        th = document.getElementsByTagName("th");
+        //console.log(th[0]);
+        
+        for (let i = 0; i < th.length; i++) {
+            th[i].style.backgroundColor = "#888";
+            th[i].style.border = "1px solid black";
+            //th[i].style.margin = "0px";
+            //th[i].style.borderBottom = "1px solid black";
+            
+        }
+        
+        td = document.getElementsByTagName("td");
+        //console.log(td[10]);
+        for (let i = 0; i < td.length; i++) {
+            td[i].style.textAlign = "center";
+            td[i].style.border = "1px solid black";
+        }
+        
+        
+        totalTxt = document.getElementById("totalTxt");
+        totalTxt.style.fontSize = "1.1em";
+        totalTxt.style.backgroundColor = "#888";
+        totalTxt.style.height = "40px";
+        
+        total = document.getElementById("total");
+        //console.log(total.value);
+        total.style.fontSize = "1.5em";
+        total.style.textAlign = "center";
+        total.style.border = "none";
+        
+        
+        opt1 = document.getElementById("opt1")
+        opt1.onchange = function(){
+            console.log("옵션1 선택, this.checked : " + this.checked);
+            if (this.checked) {
+                total.value = (total.value * 1) + (opt1.value * 1)
+            } else {
+                total.value = (total.value * 1) - (opt1.value * 1)
+            }
+        };
+        
+        opt2 = document.getElementById("opt2");
+        opt2.onchange = function(){
+            console.log("옵션2 선택, this.checked : " + this.checked);
+            if (this.checked) {
+                total.value = (total.value * 1) + (opt2.value * 1)
+            } else {
+                total.value = (total.value * 1) - (opt2.value * 1)
+            }
+        };
+        
+        opt3 = document.getElementById("opt3");
+        opt3.onchange = function(){
+            console.log("옵션3 선택, this.checked : " + this.checked);
+            if (this.checked) {
+                total.value = (total.value * 1) + (opt3.value * 1)
+            } else {
+                total.value = (total.value * 1) - (opt3.value * 1)
+            }
+        };
+        
+        
+    };
+</script>
+</head>
+<body>
+    
+<div id="carZone">
+    <h1>자동차 견적</h1>
+    <p>
+        <img src="images/car1.jpg" alt="자동차이미지">
+    </p>
+    <table>
+        <colgroup>
+            <col width="50%">
+            <col width="30%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>옵션</th>
+                <th>추가가격</th>
+                <th>옵션선택</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>가죽시트</td>
+                <td>300,000</td>
+                <td>
+                    <input type="checkbox" value="300000" id="opt1" class="opt">
+                </td>
+            </tr>
+            <tr>
+                <td>네비게이션</td>
+                <td>400,000</td>
+                <td>
+                    <input type="checkbox" value="400000" id="opt2" class="opt">
+                </td>
+            </tr>
+            <tr>
+                <td>썬루프</td>
+                <td>500,000</td>
+                <td>
+                    <input type="checkbox" value="500000" id="opt3" class="opt">
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td id="totalTxt">차량금액(옵션포함)</td>
+                <td colspan="2">
+                    <input type="text" value="20000000" id="total" readonly> 
+                    <!--readonly 안주면 사용자가 수정 가능함 --> 
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>    
+    
+    
+</body>
+</html>
