@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>jQuery import</title>
+    <!-- jQuery import 방식1 -->
+    <!--<script src="js/jquery-3.7.1.min.js"></script>-->
+    <!-- jQuery import 방식2 - CDN 방식 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    console.log("head JavaScript 시작~~");
+    
+    //JavaScript DOM 객체 다루기
+    window.onload = function(){
+        console.log("window.onload 이벤트 --------");
+        document.getElementById("id1").style.color = "blue";
+    };
+    
+    //제이쿼리(jQuery) 사용방식 3가지
+    //------------------
+    //방식1 : jQuery(document).ready(function(){});
+    //jQuery를 $로 치환해서 사용  
+    //         -> $(document).ready(function(){});
+    jQuery(document).ready(function(){ 
+        console.log("jQuery document ready ~~~");
+        jQuery("#id1").css("background-color", "yellow");
+    });
+    $(document).ready(function(){
+        $("#id1").css("border", "3px solid red");
+    });
+    //------------------
+    //방식2 : $().ready(function(){}); 
+    //document 생략 가능
+    $().ready(function(){
+        $("#id1").css("background-color", "orange");
+    }); 
+    //------------------
+    //방식3 : $(function(){}); 
+    //ready도 생략
+    $(function(){
+        $("#id1").css("background-color", "green");
+    }); 
+    //------------------
+    
+    
+    
+</script>    
+</head>
+<body>
+    <h1 id="id1">제이쿼리(jQuery)</h1>
+    
+    
+<script> //DOM 객체 컨트롤 가능 (위에서 아래로 읽으니까)
+    console.log("body끝 JavaScript ~~");
+    //document.querySelector("#id1").style.backgroundColor = "aqua"; 
+    $("#id1").css("background-color", "aqua"); //위와 같은 결과를 보여주나 css는 기능을 포함하고 있다? 더 간단하다.
+</script>
+    
+    
+</body>
+</html>
