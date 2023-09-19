@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>자동차견적 inline 방식</title>
+<style>
+    #carZone {
+        border: 1px solid blue;
+        width: 600px;
+        margin: auto; /*가로방향 센터정렬*/
+    }
+    h1 { text-align: center; }
+    #car {
+        width: 100%;
+        border-collapse: collapse; /*보더라인 두줄이 한줄로 표시*/
+        text-align: center;
+    }
+    #car th, #car td {
+        border: 1px solid black;
+    }
+    #car thead { background-color: gray; }
+    #totalTxt { background-color: gray; }
+    #total {
+        border: none;
+        text-align: center;
+        font-size: 1.5em;
+    }
+</style>    
+<script>
+    // 옵션 금액에 따라 차량금액 변경처리
+    // 기본차량가액에서 시작해서 옵션금액 변경시마다 더하기, 빼기 처리
+    // 체크상태 : 옵션금액 더하기
+    // 체크해제상태 : 옵션금액 빼기
+    //------------------------
+    // 개별 데이터 처리방식
+    //------------------------
+    function compute(opt) { //콜백함수 아니고 일반함수임
+        console.log("this : " + this); //일반함수에서 this는 window객체다 --> this로 input태그를 사용할 수 없지만 매개변수로 this를 전달해주면 사용할 수 있음
+        console.log("opt : " + opt); //HTMLInputElement
+        console.log("opt.id : " + opt.id); //opt1
+        
+        let totalTag = document.getElementById("total");
+        let totalValue = parseInt(totalTag.value);
+        
+        let optValue = parseInt(opt.value); //그냥 사용하면 문자임
+        if (opt.checked) { //옵션금액 더하기
+            totalValue += optValue;
+        } else { //옵션금액 빼기
+            totalValue -= optValue;
+        }
+        console.log("totalValue : " + totalValue); //계산은 잘되고 있는데 input 태그값에 있는 value값을 안 바꿔서 콘솔에 다르게 뜸
+        
+        //화면에 표시
+        totalTag.value = totalValue;
+    } 
+    
+    
+</script>
+</head>
+<body>
+    
+<div id="carZone">
+    <h1>자동차 견적</h1>
+    <p>
+        <img src="images/car1.jpg" alt="자동차이미지">
+    </p>
+    <table id="car"> 
+        <colgroup>
+            <col width="50%">
+            <col width="30%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>옵션</th>
+                <th>추가가격</th>
+                <th>옵션선택</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>가죽시트</td>
+                <td>300,000</td>
+                <td>
+                    <input type="checkbox" value="300000" id="opt1" class="opt" onclick="compute(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>네비게이션</td>
+                <td>400,000</td>
+                <td>
+                    <input type="checkbox" value="400000" id="opt2" class="opt" onclick="compute(this)">
+                </td>
+            </tr>
+            <tr>
+                <td>썬루프</td>
+                <td>500,000</td>
+                <td>
+                    <input type="checkbox" value="500000" id="opt3" class="opt" onclick="compute(this)">
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td id="totalTxt">차량금액(옵션포함)</td>
+                <td colspan="2">
+                    <input type="text" value="20000000" id="total" readonly> 
+                    <!--readonly 안주면 사용자가 수정 가능함 --> 
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>    
+    
+    
+</body>
+</html>

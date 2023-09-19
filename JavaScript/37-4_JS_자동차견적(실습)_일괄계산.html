@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>자동차견적 inline 방식</title>
+<style>
+    #carZone {
+        border: 1px solid blue;
+        width: 600px;
+        margin: auto; /*가로방향 센터정렬*/
+    }
+    h1 { text-align: center; }
+    #car {
+        width: 100%;
+        border-collapse: collapse; /*보더라인 두줄이 한줄로 표시*/
+        text-align: center;
+    }
+    #car th, #car td {
+        border: 1px solid black;
+    }
+    #car thead { background-color: gray; }
+    #totalTxt { background-color: gray; }
+    #total {
+        border: none;
+        text-align: center;
+        font-size: 1.5em;
+    }
+</style>    
+<script>
+    // 기본차량가액 + 체크된 옵션금액(일괄 옵션 처리방식으로) 
+    // 옵션 체크박스에 이벤트 발생시 모든 옵션을 확인해서 체크된 금액을 모두 합산 처리한다
+    
+    let totalTag; //합계금액 표시할 input 객체
+    let initValue = 0; //차량 기본 금액(최초 설정 금액);
+    
+    window.onload = function(){
+        totalTag = document.getElementById("total");
+        initValue = parseInt(totalTag.value); 
+        console.log("initValue : " + initValue);
+        
+        //옵션태그에 이벤트 연결
+        //document.getElementById("opt1").onclick = fnComputeTotal;
+        //document.getElementById("opt2").onclick = fnComputeTotal;
+        //document.getElementById("opt3").onclick = fnComputeTotal;
+        
+        let options = document.querySelectorAll(".opt");
+        for (let opt of options) {
+            opt.addEventListener("click", fnComputeTotal); //이벤트명, 연결할 함수명
+        }
+        
+        
+    };
+    
+    function fnComputeTotal(){
+        console.log("this.id : " + this.id);
+        
+        let opts = document.getElementsByClassName("opt");
+        console.log(opts);
+        
+        let totalValue = initValue; //initValue를 그대로 if문 안에 가져다 쓰면 계속 누적된다(기본금액이 바뀐다) ---> 함수 실행할 때마다 2천만원에서 시작되어야됨 >> 기본금액이 2천만원에서 바뀌지 않도록 다른 변수에 저장(초기값 설정)
+        console.log("totalValue : " + totalValue);
+        
+        //모든 옵션을 확인해서 체크된 금액을 initValue에 모두 합산하기
+        for (let option of opts) { //in을 사용하면 인덱스값을 가져옴
+            console.log("option.id : " + option.id);
+            console.log("option.checked : " + option.checked);
+            //옵션마다 id값과 체크상태 확인할 수 있다
+            if (option.checked) {
+                totalValue += Number(option.value); 
+            } 
+        }
+        console.log("totalValue : " + totalValue);
+        
+        //화면에 표시
+        totalTag.value = totalValue;
+        
+        //(개인실습) 기본 설정값(defaultValue) 확인 (totalTag 태그값 객체 직접 선택. initValue 변수 생성 안 해도 사용 가능하다.)
+        console.log("totalTag.defaultValue : " + totalTag.defaultValue);
+    };
+    
+</script>
+</head>
+<body>
+    
+<div id="carZone">
+    <h1>자동차 견적</h1>
+    <p>
+        <img src="images/car1.jpg" alt="자동차이미지">
+    </p>
+    <table id="car"> 
+        <colgroup>
+            <col width="50%">
+            <col width="30%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>옵션</th>
+                <th>추가가격</th>
+                <th>옵션선택</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>가죽시트</td>
+                <td>300,000</td>
+                <td>
+                    <input type="checkbox" value="300000" id="opt1" class="opt">
+                </td>
+            </tr>
+            <tr>
+                <td>네비게이션</td>
+                <td>400,000</td>
+                <td>
+                    <input type="checkbox" value="400000" id="opt2" class="opt">
+                </td>
+            </tr>
+            <tr>
+                <td>썬루프</td>
+                <td>500,000</td>
+                <td>
+                    <input type="checkbox" value="500000" id="opt3" class="opt">
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td id="totalTxt">차량금액(옵션포함)</td>
+                <td colspan="2">
+                    <input type="text" value="20000000" id="total" readonly> 
+                    <!--readonly 안주면 사용자가 수정 가능함 --> 
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>    
+    
+    
+</body>
+</html>
