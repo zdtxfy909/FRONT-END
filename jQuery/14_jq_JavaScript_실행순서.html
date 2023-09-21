@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>실행순서</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    //JavaScript 실행 순서 확인
+    let order = 1;
+    console.log(order++ + " : head script 시작 : " + $("#test").text() + "::"); 
+    //사용가능하면 콘솔에 text 뜨고 불가능이면 null뜸 -> 사용불가
+    
+    $(document).ready(function(){
+        console.log(order++ + " : jQuery ready 시작 : " + $("#test").text() + "::"); 
+        
+        call();
+        $("#btn").click(function(){
+            console.log(order++ + " : btn click 시작 : " + $("#test").text() + "::"); 
+            
+            call();
+            
+            console.log(order++ + " : btn click 시작 : " + $("#test").text() + "::"); 
+        });
+        
+        console.log(order++ + " : jQuery ready 끝 : " + $("#test").text() + "::"); 
+    }); //body태그 끝나고나서 사용할 수 있다.
+    
+    function call(){
+        console.log(order++ + " : function call() 내부 : " + $("#test").text() + "::"); //DOM사용가능
+    }; //가장 마지막에 호출됨
+    
+    call(); //똑같은 함수 호출이여도 function call()이 실행이 마지막에 되기 때문에 (사용시점이 달라서) 못 쓴다.
+    
+    console.log(order++ + " : head script 끝 : " + $("#test").text() + "::"); 
+    
+</script>
+</head>
+<body>
+<script>
+    //body내 script 작성
+    console.log(order++ + " : body 시작 : " + $("#test").text() + "::");
+    
+    
+    
+</script>
+    
+    
+    <h2>JavaScript 실행 순서</h2>
+    <button onclick="call()">call() function 호출(HTML)</button> <!--HTML은 inline 방식-->
+    <button id="btn">call() function 호출(jQuery 이벤트 연결)</button>
+    
+    <p id="test">DOM 사용 가능</p>
+    
+<script>
+    //body내에서도 작성 가능하지만 위에서 아래로 읽어진다.
+    
+    console.log(order++ + " : body 끝 : " + $("#test").text() + "::");
+    
+    
+</script>    
+</body>
+</html>

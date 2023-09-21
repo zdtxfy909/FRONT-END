@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>이벤트 click, change</title>
+    <!-- jQuery import 방식2(CDN 방식) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function(){ 
+        //====================
+        //select 이벤트 확인 : click, change --> change 사용하는게 좋다.
+        
+        //$("#mySelect").click(function(){
+        //    console.log("> select click!")
+        //});
+        
+        $("#mySelect").change(function(){ //값이 변경될 때 발생한다
+            console.log("> select change 이벤트 발생~~")
+            let selectedValue = $("#mySelect>option:selected").val();
+            //자녀태그 찾고 필터링
+            $("#selectStr").val(selectedValue); // .val(값) : value 속성에 값 저장. selected 된 값을 input 태그 value에 저장
+        }); 
+        
+        //====================
+        // radio 이벤트 확인 : click, change --> change 사용하는게 효율적이다.
+        
+        //$(".gender").click(function(){
+        //    console.log("--- radio 클릭! - " + this.id);
+            //클릭할 때마다 이벤트 발생 > 값이 바뀌지 않아도 이벤트 발생
+        //});
+        
+        $(".gender").change(function(){
+            console.log("--- radio change 이벤트 발생! - " + this.id)
+            //값이 변경될 때만 발생
+            
+            //console.log($(".gender")); //배열을 리턴
+            //console.log($(".gender:checked")); //체크된 값만 리턴
+            //$(".gender:checked") 클래스명 gender 중에 체크된 것만 필터링
+            let checkedValue = $(".gender:checked").val();
+            $("#radioStr").val(checkedValue);
+            
+        });
+        
+        //====================
+        // checkbox 이벤트 확인 : click, change -- 관계없다(의미상 change 사용하는게 좋다.)
+        
+        //$(".chk").click(function(){
+        //    console.log(":: checkbox 클릭~~~");
+            // 클릭해도 결과값이 바뀜 (선택한다, 안한다)
+        //});
+        
+        $(".chk").change(function(){
+            console.log(":: checkbox change 이벤트 발생 ~~!");
+            //체크박스 선택,해제될 때 모두 발생 
+            let checkedValue = "";
+            $(".chk:checked").each(function(){
+                // this : 현재 처리중인 데이터(JavaScript 객체)
+                //console.log(this.value); //JavaScript
+                //console.log($(this).val()); //jQuery
+                checkedValue += this.value + " "; //JavaScript 객체 사용 방식
+                //checkedValue += $(this).val() + " "; //jQuery 객체 사용
+            });
+            $("#checkedStr").val(checkedValue.trim()); //맨 뒤에 빈칸 없애줌
+            
+        });
+        
+        
+    });
+</script>
+</head>
+<body>
+    <form>
+        <!-- select -->
+        <select id="mySelect" name="select">
+            <option selected disabled>::선택</option> <!-- 선택이 기본으로 뜨고 서버쪽에 이 값은 전달하지 않는다 disabled -->
+            <option value="Java">자바</option>
+            <option value="JavaScript">자바스크립트</option>
+            <option value="jQuery">제이쿼리</option>
+        </select>
+        <input type="text" name="str" id="selectStr" disabled>
+        <hr>
+        
+        <!-- radio : 하나만 선택 가능-->
+        <input type="radio" name="gender" value="M" id="gender1" class="gender"> 
+        <!-- 상자에 뜨는 값(실제 사용하는 데이터)이 value임 -->
+        <label for="gender1">남자</label> <!--input태그와 연결 -->
+        <input type="radio" name="gender" value="F" id="gender2" class="gender">
+        <label for="gender2">여자</label> <!--input태그와 연결 -->
+        <input type="text" name="str2" id= "radioStr" disabled>
+        
+        <hr>
+        
+        <!-- checkbox : 여러개 선택 가능-->
+        <input type="checkbox" name="hobby" class="chk" value="football"> 축구
+        <input type="checkbox" name="hobby" class="chk" value="baseball"> 야구
+        <input type="checkbox" name="hobby" class="chk" value="basketball"> 농구
+        <input type="checkbox" name="hobby" class="chk" value="tennis"> 테니스
+        <input type="text" name="str3" id="checkedStr" disabled>
+        
+        <hr>
+        <input type="submit" value="서버로 전송">
+    </form>
+    
+    
+    
+</body>
+</html>
